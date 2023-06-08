@@ -5,7 +5,7 @@ function AddProductNavbar() {
     <nav>
       <h1 className="nav__title">Product add</h1>
       <div className="nav__buttons">
-        <button className="nav__buttons-btn-ghost nav__button">
+        <button className="nav__buttons-btn-ghost nav__button" form="product_form">
           Save
         </button>
         <Link to="/" className="nav__buttons-btn-ghost">

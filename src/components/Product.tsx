@@ -1,15 +1,7 @@
+import { addSku } from "../features/deleteSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { ProductProps } from "./pages/ProductsList";
 import Card from "./layout/Card";
-
-type ProductProps = {
-  sku: string;
-  name: string;
-  price: string;
-  weight?: number;
-  size?: number;
-  height?: number;
-  width?: number;
-  length?: number;
-};
 
 function Product({
   sku,
@@ -21,12 +13,26 @@ function Product({
   width,
   length
 }: ProductProps) {
+
+  const dispatch = useAppDispatch()
+  const allSkus = useAppSelector(state=>state.delete.selectedSkus)
+
+  const onChange = (sku:string) => {
+    const skus = allSkus.find(s => s === sku) 
+    
+    if (skus) {
+      dispatch(addSku({selectedSkus: allSkus.filter(s => s !== sku )}))
+    }else{
+      dispatch(addSku({selectedSkus:[...allSkus,sku]}))
+    }
+  }
+
   return (
     <div>
       <Card>
         <div className="product-info">
           <div>
-            <input type="checkbox" className="delete-checkbox" />
+            <input type="checkbox" className="delete-checkbox" id="checkItem" value={sku} onChange={() => onChange (sku)} />
           </div>
           <div className="product-description">
             <p>{sku}</p>

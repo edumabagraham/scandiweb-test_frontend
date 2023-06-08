@@ -1,11 +1,12 @@
 
 import Footer from './../layout/Footer';
 import AddProductNavbar from './../layout/AddProductNavbar';
+import MainForm from './../layout/MainForm';
 function AddProduct() {
   return (
-    <div className='home'>
+    <div className='home '>
       <AddProductNavbar/>
-      <h1>Add product page</h1>
+      <MainForm/>
       <Footer/>
     </div>
   )

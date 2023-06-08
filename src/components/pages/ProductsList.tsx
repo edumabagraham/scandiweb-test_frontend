@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+import Spinner from "../layout/Spinner";
 import Product from "../Product";
 
-type ProductProps = {
+
+export type ProductProps = {
   sku: string;
   name: string;
   price: string;
@@ -13,36 +16,45 @@ type ProductProps = {
 };
 function ProductsList() {
   const [products, setProducts] = useState<ProductProps[]>([]);
+  const [loading, setLoading] = useState(true)
+
+  const fetchProducts = () => {
+    axios.get("http://localhost/scandiweb_test/api/readproducts.php")
+    .then((res) => { 
+      setProducts(res.data)
+      setLoading(false)
+    })
+    .catch(err => console.log(err))
+    setLoading(false)
+  }
 
   useEffect(() => {
-    fetch("http://localhost/scandiweb_test/api/readproducts.php")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-
-        setProducts(data);
-      });
+    
+    fetchProducts();
   }, []);
 
-  return (
-    <div className="products-list">
-      {products.map((product) => (
-        <Product
-          key={product.sku}
-          sku={product.sku}
-          name={product.name}
-          price={product.price}
-          weight={product.weight}
-          size={product.size}
-          height={product.height}
-          width={product.width}
-          length={product.length}
-        />
-      ))}
-    </div>
-  );
+  if (!loading) {
+      return (
+        <div className="products-list">
+          {products.map((product) => (
+            <Product
+              key={product.sku}
+              sku={product.sku}
+              name={product.name}
+              price={product.price}
+              weight={product.weight}
+              size={product.size}
+              height={product.height}
+              width={product.width}
+              length={product.length}
+            />
+          ))}
+        </div>
+      );
+  }
+  else{
+    return <Spinner />
+  }
 }
 
 export default ProductsList;
