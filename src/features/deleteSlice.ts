@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface InitialState{
   selectedSkus: string[]
+  deleting: boolean
 }
 
 const initialState: InitialState = {
-  selectedSkus: []
+  selectedSkus: [],
+  deleting:false
 };
 
 export const deleteSlice = createSlice({
@@ -14,9 +16,13 @@ export const deleteSlice = createSlice({
   reducers: {
     addSku (state, action:PayloadAction<{selectedSkus:string[]}>) {
       state.selectedSkus = action.payload.selectedSkus
+    },
+
+    deleting (state, action:PayloadAction<{deleting:boolean}>){
+      state.deleting = action.payload.deleting
     }
   },
 });
 
-export const {addSku} = deleteSlice.actions
+export const {addSku, deleting} = deleteSlice.actions
 export default deleteSlice.reducer
