@@ -1,18 +1,14 @@
 import { Link } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import axios from "axios";
-import { deleting } from "../../features/deleteSlice";
 
 function Navbar() {
-  const selectedSku = useAppSelector((state) => state.delete.selectedSkus);
-  const dispatch = useAppDispatch()
+  const selectedSku = ['']
 
   const deleteProducts = () => {
     axios.post(
       "http://localhost/scandiweb_test/api/deleteproduct.php", selectedSku
     ).then(response => {
-      console.log(response);
-      dispatch(deleting({deleting:true}))
+      // console.log(response);
     })
     .catch(err => alert(err));
   };

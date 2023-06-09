@@ -74,19 +74,10 @@ function MainForm() {
     ) {
       toast.error("Please, submit required data", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "light",
       });
     }
-    //--------------------------------------------------------------------------------------
 
-    //--------------------------------------------------------------------------------------
-    //Notification for invalid data
     else if (
       !isNaN(Number(formData.sku)) ||
       !isNaN(Number(formData.name)) ||
@@ -99,23 +90,13 @@ function MainForm() {
     ) {
       toast.error("Please, provide the data of indicated type", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "light",
       });
     }
-    //--------------------------------------------------------------------------------------
 
-    //--------------------------------------------------------------------------------------
-    // Remove empty entries from object
     const cleanedData = Object.fromEntries(
       Object.entries(formData).filter(([_, val]) => val != "")
     );
-    //--------------------------------------------------------------------------------------
 
     try {
       axios
