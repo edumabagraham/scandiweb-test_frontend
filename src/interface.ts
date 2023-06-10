@@ -28,9 +28,9 @@ export interface IProducts{
   export interface IProductsContext {
     products: IProducts[]
     loading: boolean
-    skus?: string[]
+    skus: string[]
+    setSkus: React.Dispatch<React.SetStateAction<string[] | []>>
+    setLoading?: React.Dispatch<React.SetStateAction<boolean>>
     fetchProducts: () => void
-    addProduct?: () => void
-    deleteProduct?: () => void
-    setLoading?: () => void
+
   }

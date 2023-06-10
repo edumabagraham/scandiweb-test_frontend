@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import { ProductsContext } from "../../context/ProductsContext";
 import axios from "axios";
 
 function Navbar() {
-  const selectedSku = ['']
+  const {skus, fetchProducts} = useContext(ProductsContext)
 
   const handleDelete = () => {
     axios.post(
-      "http://localhost/scandiweb_test/api/deleteproduct.php", selectedSku
-    ).then(response => {
-      // console.log(response);
+      "http://localhost/scandiweb_test/api/deleteproduct.php", skus
+    ).then(() => {
+      fetchProducts();
     })
     .catch(err => alert(err));
   };
