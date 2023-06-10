@@ -1,42 +1,20 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect,useContext } from "react";
 import Spinner from "../layout/Spinner";
 import Product from "../Product";
+import {ProductsContext} from "../../context/ProductsContext";
 
-export type ProductProps = {
-  sku: string;
-  name: string;
-  price: string;
-  weight?: number;
-  size?: number;
-  height?: number;
-  width?: number;
-  length?: number;
-};
+
 function ProductsList() {
-  const [products, setProducts] = useState<ProductProps[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchProducts = () => {
-    axios
-      .get("http://localhost/scandiweb_test/api/readproducts.php")
-      .then((res) => {
-        setProducts(res.data);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
-    setLoading(false);
-  };
-
+  const {fetchProducts, products, loading} = useContext(ProductsContext);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   if (!loading) {
-    if (products.length === 0) {
-      return <div>No products yet</div>;
-    } else {
+    // if (products.length === 0) {
+    //   return <div>No products yet</div>;
+    // } else {
       return (
         <div className="products-list">
           {products.map((product) => (
@@ -54,7 +32,7 @@ function ProductsList() {
           ))}
         </div>
       );
-    }
+    // }
   } else {
     return <Spinner />;
   }

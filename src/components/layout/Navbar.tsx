@@ -4,7 +4,7 @@ import axios from "axios";
 function Navbar() {
   const selectedSku = ['']
 
-  const deleteProducts = () => {
+  const handleDelete = () => {
     axios.post(
       "http://localhost/scandiweb_test/api/deleteproduct.php", selectedSku
     ).then(response => {
@@ -25,7 +25,7 @@ function Navbar() {
         <button
           className="nav__buttons-btn-ghost nav__button"
           id="delete-product-btn"
-          onClick={deleteProducts}
+          onClick={handleDelete}
         >
           Mass delete
         </button>

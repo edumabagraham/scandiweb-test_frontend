@@ -1,4 +1,4 @@
-import { ProductProps } from "./pages/ProductsList";
+import { IProducts } from "../interface";
 import Card from "./layout/Card";
 
 function Product({
@@ -10,7 +10,7 @@ function Product({
   height,
   width,
   length
-}: ProductProps) {
+}: IProducts) {
 
 
 

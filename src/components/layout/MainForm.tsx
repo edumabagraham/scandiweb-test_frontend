@@ -1,23 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-
-interface MyFormValues {
-  sku: string;
-  name: string;
-  price: string;
-  type: string;
-  size?: string;
-  weight?: string;
-  height?: string;
-  width?: string;
-  length?: string;
-}
+import { IFormValues } from "../../interface";
 
 function MainForm() {
-  const [formData, setFormData] = useState<MyFormValues>({
+  const [formData, setFormData] = useState<IFormValues>({
     sku: "",
     name: "",
     price: "",
@@ -31,7 +20,7 @@ function MainForm() {
 
   const navigate = useNavigate();
 
-  const handleChange = (event: { target: { name: any; value: any } }) => {
+  const handleChange = (event: { target: { name: string; value: string } }) => {
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -55,7 +44,7 @@ function MainForm() {
     }
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
 
     //--------------------------------------------------------------------------------------
@@ -74,11 +63,10 @@ function MainForm() {
     ) {
       toast.error("Please, submit required data", {
         position: "top-center",
-        theme: "light",
       });
     }
 
-    else if (
+    if (
       !isNaN(Number(formData.sku)) ||
       !isNaN(Number(formData.name)) ||
       isNaN(Number(formData.price)) ||
@@ -90,7 +78,6 @@ function MainForm() {
     ) {
       toast.error("Please, provide the data of indicated type", {
         position: "top-center",
-        theme: "light",
       });
     }
 
@@ -106,16 +93,10 @@ function MainForm() {
             if (response.data.message === "Product added") {
               navigate("/");
             }
-            if (response.data.message === "SKU already exists!") {
-              toast.error("SKU already exists! It has to be unique", {
+            const msg = response.data.message;
+            if (msg === "SKU already exists!") {
+              toast.error("SKU already exists!", {
                 position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
               });
             }
           }
