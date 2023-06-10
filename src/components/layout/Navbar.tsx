@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { useContext } from 'react';
+import { ProductsContext } from "../../context/ProductsContext";
 import axios from "axios";
-import { deleting } from "../../features/deleteSlice";
 
 function Navbar() {
-  const selectedSku = useAppSelector((state) => state.delete.selectedSkus);
-  const dispatch = useAppDispatch()
+  const {skus, fetchProducts} = useContext(ProductsContext)
 
-  const deleteProducts = () => {
+  const handleDelete = () => {
     axios.post(
-      "http://localhost/scandiweb_test/api/deleteproduct.php", selectedSku
-    ).then(response => {
-      console.log(response);
-      dispatch(deleting({deleting:true}))
+      "http://localhost/scandiweb_test/api/deleteproduct.php", skus
+    ).then(() => {
+      fetchProducts();
     })
     .catch(err => alert(err));
   };
@@ -29,7 +27,7 @@ function Navbar() {
         <button
           className="nav__buttons-btn-ghost nav__button"
           id="delete-product-btn"
-          onClick={deleteProducts}
+          onClick={handleDelete}
         >
           Mass delete
         </button>
