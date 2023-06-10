@@ -12,7 +12,15 @@ function Product({
   length
 }: IProducts) {
 
-
+  // const onChange = (sku:string) => {
+  //   const skus = allSkus.find(s => s === sku) 
+    
+  //   if (skus) {
+  //     dispatch(addSku({selectedSkus: allSkus.filter(s => s !== sku )}))
+  //   }else{
+  //     dispatch(addSku({selectedSkus:[...allSkus,sku]}))
+  //   }
+  // }
 
 
   return (
