@@ -25,9 +25,11 @@ export const ProductsProvider = ({ children }: IChildren) => {
       .then((res) => {
         setProducts(res.data);
         setLoading(false);
+        console.log(res.data);
+        
       })
       .catch((err) => console.log(err));
-    setLoading(false);
+    // setLoading(true);
   };
 
   return (

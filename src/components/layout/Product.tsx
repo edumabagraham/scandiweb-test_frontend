@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { IProducts } from "../interface";
-import Card from "./layout/Card";
-import { ProductsContext } from "../context/ProductsContext";
+import { IProducts } from "../../interface";
+import Card from "./Card";
+import { ProductsContext } from "../../context/ProductsContext";
 
 function Product({
   sku,
