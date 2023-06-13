@@ -14,15 +14,6 @@ function Product({
   length,
 }: IProducts) {
   const { skus, setSkus } = useContext(ProductsContext);
-  // const onChange = (sku:string) => {
-  //   const skus = allSkus.find(s => s === sku)
-
-  //   if (skus) {
-  //     dispatch(addSku({selectedSkus: allSkus.filter(s => s !== sku )}))
-  //   }else{
-  //     dispatch(addSku({selectedSkus:[...allSkus,sku]}))
-  //   }
-  // }
 
   const onChange = (product_sku: string) => {
     const all_skus = skus.find(s => s === sku);

@@ -5,19 +5,19 @@ export interface IChildren {
 export interface IFormValues {
   sku: string;
   name: string;
-  price: string;
+  price: number | undefined;
   type: string;
-  size?: string;
-  weight?: string;
-  height?: string;
-  width?: string;
-  length?: string;
+  size?: number | undefined;
+  weight?: number | undefined;
+  height?: number | undefined;
+  width?: number | undefined;
+  length?: number | undefined;
 }
 
 export interface IProducts{
     sku: string;
     name: string;
-    price: string;
+    price: number;
     weight?: number;
     size?: number;
     height?: number;
@@ -27,6 +27,7 @@ export interface IProducts{
 
   export interface IProductsContext {
     products: IProducts[]
+    msg:string
     loading: boolean
     skus: string[]
     setSkus: React.Dispatch<React.SetStateAction<string[] | []>>

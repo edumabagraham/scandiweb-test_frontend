@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,13 +9,13 @@ function MainForm() {
   const [formData, setFormData] = useState<IFormValues>({
     sku: "",
     name: "",
-    price: "",
+    price: undefined,
     type: "",
-    size: "",
-    weight: "",
-    height: "",
-    width: "",
-    length: "",
+    size: undefined,
+    weight: undefined,
+    height: undefined,
+    width: undefined,
+    length: undefined,
   });
 
   const navigate = useNavigate();
@@ -29,58 +29,46 @@ function MainForm() {
     });
 
     if (formData.type === "dvd") {
-      formData.weight = "";
-      formData.height = "";
-      formData.length = "";
-      formData.width = "";
+      formData.weight = undefined;
+      formData.height = undefined;
+      formData.length = undefined;
+      formData.width = undefined;
     } else if (formData.type === "book") {
-      formData.size = "";
-      formData.height = "";
-      formData.length = "";
-      formData.width = "";
+      formData.size = undefined;
+      formData.height = undefined;
+      formData.length = undefined;
+      formData.width = undefined;
     } else if (formData.type === "furniture") {
-      formData.size = "";
-      formData.weight = "";
+      formData.size = undefined;
+      formData.weight = undefined;
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<EventTarget>) => {
-    event.preventDefault();
-
-    //--------------------------------------------------------------------------------------
-    //Notification for empty fields
+  const validateForm = () => {
+  
     if (
       formData.sku === "" ||
       formData.name === "" ||
-      formData.price === "" ||
-      (formData.type === "dvd" && formData.size === "") ||
-      (formData.type === "book" && formData.weight === "") ||
+      formData.price === undefined ||
+      (formData.type === "dvd" && formData.size === undefined) ||
+      (formData.type === "book" && formData.weight === undefined) ||
       (formData.type === "furniture" &&
-        formData.height === "" &&
-        formData.width === "" &&
-        formData.length === "") ||
-      formData.type === ""
+        formData.height === undefined &&
+        formData.width === undefined &&
+        formData.length === undefined) ||
+      formData.type === undefined
     ) {
       toast.error("Please, submit required data", {
         position: "top-center",
       });
     }
+  }
 
-    if (
-      !isNaN(Number(formData.sku)) ||
-      !isNaN(Number(formData.name)) ||
-      isNaN(Number(formData.price)) ||
-      isNaN(Number(formData.size)) ||
-      isNaN(Number(formData.weight)) ||
-      isNaN(Number(formData.height)) ||
-      isNaN(Number(formData.width)) ||
-      isNaN(Number(formData.length))
-    ) {
-      toast.error("Please, provide the data of indicated type", {
-        position: "top-center",
-      });
-    }
+  const handleSubmit = (event: React.FormEvent<EventTarget>) => {
+    event.preventDefault();
 
+    validateForm();
+    
     const cleanedData = Object.fromEntries(
       Object.entries(formData).filter(([_, val]) => val != "")
     );
@@ -114,6 +102,7 @@ function MainForm() {
           <input
             type="text"
             name="sku"
+            id="sku"
             value={formData.sku}
             onChange={handleChange}
           />
@@ -123,6 +112,7 @@ function MainForm() {
           <input
             type="text"
             name="name"
+            id="name"
             value={formData.name}
             onChange={handleChange}
           />
@@ -130,9 +120,10 @@ function MainForm() {
         <div className="input_label">
           <label htmlFor="price">Price ($)</label>
           <input
-            type="text"
+            type="number"
             name="price"
-            value={formData.price}
+            id="price"
+            value={formData.price || ''}
             onChange={handleChange}
           />
         </div>
@@ -155,10 +146,10 @@ function MainForm() {
             <div className="input_label">
               <label htmlFor="size">Size (MB)</label>
               <input
-                type="text"
+                type="number"
                 id="size"
                 name="size"
-                value={formData.size}
+                value={formData.size || ''}
                 onChange={handleChange}
               />
             </div>
@@ -170,10 +161,10 @@ function MainForm() {
             <div className="input_label">
               <label htmlFor="weight">Weight (KG)</label>
               <input
-                type="text"
+                type="number"
                 id="weight"
                 name="weight"
-                value={formData.weight}
+                value={formData.weight || ''}
                 onChange={handleChange}
               />
             </div>
@@ -185,30 +176,30 @@ function MainForm() {
             <div className="input_label">
               <label htmlFor="height">Height (CM)</label>
               <input
-                type="text"
+                type="number"
                 id="height"
                 name="height"
-                value={formData.height}
+                value={formData.height || ''}
                 onChange={handleChange}
               />
             </div>
             <div className="input_label">
               <label htmlFor="width">Width (CM)</label>
               <input
-                type="text"
+                type="number"
                 id="width"
                 name="width"
-                value={formData.width}
+                value={formData.width || ''}
                 onChange={handleChange}
               />
             </div>
             <div className="input_label">
               <label htmlFor="length">Length (CM)</label>
               <input
-                type="text"
+                type="number"
                 id="length"
                 name="length"
-                value={formData.length}
+                value={formData.length || ''}
                 onChange={handleChange}
               />
             </div>

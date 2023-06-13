@@ -5,18 +5,20 @@ import axios from "axios";
 
 const defaultValues = {
   products: [],
+  msg:'',
   loading: true,
   skus: [],
   setSkus: () => {},
   setLoading: () => {},
   fetchProducts: () => {},
-}
+};
 
 export const ProductsContext = createContext<IProductsContext>(defaultValues);
 
 export const ProductsProvider = ({ children }: IChildren) => {
-   const [products, setProducts] = useState<IProducts[]>([]);
-   const [skus, setSkus] = useState<string[] | []>([]);
+  const [products, setProducts] = useState<IProducts[]>([]);
+  const [msg, setMsg] = useState('');
+  const [skus, setSkus] = useState<string[] | []>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchProducts = () => {
@@ -24,23 +26,25 @@ export const ProductsProvider = ({ children }: IChildren) => {
       .get("http://localhost/scandiweb_test/api/readproducts.php")
       .then((res) => {
         setProducts(res.data);
-        setLoading(false);
-        console.log(res.data);
+        setMsg(res.data.message);
         
+        setLoading(false);
       })
       .catch((err) => console.log(err));
-    // setLoading(true);
+    setLoading(true);
   };
 
   return (
-    <ProductsContext.Provider 
+    <ProductsContext.Provider
       value={{
         products,
+        msg,
         loading,
         skus,
         setSkus,
-        fetchProducts
-      }}>
+        fetchProducts,
+      }}
+    >
       {children}
     </ProductsContext.Provider>
   );
