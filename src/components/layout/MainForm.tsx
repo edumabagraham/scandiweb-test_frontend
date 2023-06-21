@@ -45,7 +45,7 @@ function MainForm() {
   };
 
   const validateForm = () => {
-  
+
     if (
       formData.sku === "" ||
       formData.name === "" ||
@@ -64,30 +64,51 @@ function MainForm() {
     }
   }
 
-  const handleSubmit = (event: React.FormEvent<EventTarget>) => {
+  const handleSubmit =  (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
 
     validateForm();
-    
+
     const cleanedData = Object.fromEntries(
       Object.entries(formData).filter(([_, val]) => val != "")
     );
 
+
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
+
+    // const raw = JSON.stringify(cleanedData);
+
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: myHeaders,
+    //   body: raw,
+    //   redirect: 'follow'
+    // };
+
+    // fetch("https://gloria-graham.000webhostapp.com/api/addproduct.php", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log('error', error));
+
+
     const postProduct = async () => {
-      const response = await fetch("https://gloria-graham.000webhostapp.com/api/addproduct.php/", {
+      const response = await fetch("http://gloria-graham.000webhostapp.com/api/addproduct.php", {
         method: 'POST',
         body: JSON.stringify(cleanedData),
         headers: {
-          Accept: 'application.json',
+          // Accept: 'application.json',
           'Content-Type': 'application/json',
-          // mode: "cors",
+          // mode: "no-cors",
           // credentials: "same-origin"
-        }
+        },
+        redirect: 'follow'
       })
       const productData = await response.json()
       console.log(productData);
-      
+
     }
+
 
     try {
       // axios
@@ -95,7 +116,7 @@ function MainForm() {
       //   .then((response) => {
       //     if (response.status === 200) {
       //       console.log("request sent");
-            
+
       //       if (response.data.message === "Product added") {
       //         navigate("/");
       //       }
@@ -107,9 +128,11 @@ function MainForm() {
       //       }
       //     }
       //   });
-      postProduct()
+     postProduct()
+
     } catch (err) {
       console.log(err);
+      alert("Could not fetch")
     }
   };
 
