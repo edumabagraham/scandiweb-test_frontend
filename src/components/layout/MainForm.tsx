@@ -28,17 +28,17 @@ function MainForm() {
       };
     });
 
-    if (formData.type === "dvd") {
+    if (formData.type === "Dvd") {
       formData.weight = undefined;
       formData.height = undefined;
       formData.length = undefined;
       formData.width = undefined;
-    } else if (formData.type === "book") {
+    } else if (formData.type === "Book") {
       formData.size = undefined;
       formData.height = undefined;
       formData.length = undefined;
       formData.width = undefined;
-    } else if (formData.type === "furniture") {
+    } else if (formData.type === "Furniture") {
       formData.size = undefined;
       formData.weight = undefined;
     }
@@ -50,9 +50,9 @@ function MainForm() {
       formData.sku === "" ||
       formData.name === "" ||
       formData.price === undefined ||
-      (formData.type === "dvd" && formData.size === undefined) ||
-      (formData.type === "book" && formData.weight === undefined) ||
-      (formData.type === "furniture" &&
+      (formData.type === "Dvd" && formData.size === undefined) ||
+      (formData.type === "Book" && formData.weight === undefined) ||
+      (formData.type === "Furniture" &&
         formData.height === undefined &&
         formData.width === undefined &&
         formData.length === undefined) ||
@@ -75,9 +75,11 @@ function MainForm() {
 
     try {
       axios
-        .post("http://localhost/scandiweb_test/api/addproduct.php", cleanedData)
+        .post("https://gloria-graham.000webhostapp.com/api/addproduct.php/", cleanedData)
         .then((response) => {
           if (response.status === 200) {
+            console.log("request sent");
+            
             if (response.data.message === "Product added") {
               navigate("/");
             }
@@ -136,12 +138,12 @@ function MainForm() {
             onChange={handleChange}
           >
             <option value="">Type Switcher</option>
-            <option value="dvd">DVD</option>
-            <option value="book">Book</option>
-            <option value="furniture">Furniture</option>
+            <option value="Dvd">DVD</option>
+            <option value="Book">Book</option>
+            <option value="Furniture">Furniture</option>
           </select>
         </div>
-        {formData.type == "dvd" && (
+        {formData.type == "Dvd" && (
           <div className="type_container">
             <div className="input_label">
               <label htmlFor="size">Size (MB)</label>
@@ -156,7 +158,7 @@ function MainForm() {
             <p className="type_description">Please, provide size</p>
           </div>
         )}
-        {formData.type == "book" && (
+        {formData.type == "Book" && (
           <div className="type_container">
             <div className="input_label">
               <label htmlFor="weight">Weight (KG)</label>
@@ -171,7 +173,7 @@ function MainForm() {
             <p className="type_description">Please, provide weight.</p>
           </div>
         )}
-        {formData.type == "furniture" && (
+        {formData.type == "Furniture" && (
           <div className="type_container">
             <div className="input_label">
               <label htmlFor="height">Height (CM)</label>

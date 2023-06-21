@@ -23,7 +23,7 @@ export const ProductsProvider = ({ children }: IChildren) => {
 
   const fetchProducts = () => {
     axios
-      .get("http://localhost/scandiweb_test/api/readproducts.php")
+      .get("https://gloria-graham.000webhostapp.com/api/readproducts.php/")
       .then((res) => {
         setProducts(res.data);
         setMsg(res.data.message);

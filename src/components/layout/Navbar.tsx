@@ -8,7 +8,7 @@ function Navbar() {
 
   const handleDelete = () => {
     axios.post(
-      "http://localhost/scandiweb_test/api/deleteproduct.php", skus
+      "https://gloria-graham.000webhostapp.com/api/deleteproduct.php", skus
     ).then(() => {
       fetchProducts();
     })
