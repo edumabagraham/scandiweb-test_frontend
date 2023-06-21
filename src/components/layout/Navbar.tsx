@@ -14,6 +14,21 @@ function Navbar() {
     })
     .catch(err => alert(err));
   };
+  // const handleDelete =async () => {
+  //   const response = await fetch("https://gloria-graham.000webhostapp.com/api/deleteproduct.php", {
+  //     method: 'POST',
+  //     body: JSON.stringify(skus),
+  //     headers: {
+  //       Accept: 'application.json',
+  //       'Content-Type': 'application/json',
+  //       mode: "cors",
+  //       credentials: "same-origin"
+  //     }
+  //   }).then(()=>{
+  //     fetchProducts()
+  //   })
+  //   .catch(err => alert(err))
+  // }
 
   return (
     <nav>
