@@ -73,24 +73,41 @@ function MainForm() {
       Object.entries(formData).filter(([_, val]) => val != "")
     );
 
+    const postProduct = async () => {
+      const response = await fetch("https://gloria-graham.000webhostapp.com/api/addproduct.php/", {
+        method: 'POST',
+        body: JSON.stringify(cleanedData),
+        headers: {
+          Accept: 'application.json',
+          'Content-Type': 'application/json',
+          // mode: "cors",
+          // credentials: "same-origin"
+        }
+      })
+      const productData = await response.json()
+      console.log(productData);
+      
+    }
+
     try {
-      axios
-        .post("https://gloria-graham.000webhostapp.com/api/addproduct.php/", cleanedData)
-        .then((response) => {
-          if (response.status === 200) {
-            console.log("request sent");
+      // axios
+      //   .post("https://gloria-graham.000webhostapp.com/api/addproduct.php/", cleanedData)
+      //   .then((response) => {
+      //     if (response.status === 200) {
+      //       console.log("request sent");
             
-            if (response.data.message === "Product added") {
-              navigate("/");
-            }
-            const msg = response.data.message;
-            if (msg === "SKU already exists!") {
-              toast.error("SKU already exists!", {
-                position: "top-center",
-              });
-            }
-          }
-        });
+      //       if (response.data.message === "Product added") {
+      //         navigate("/");
+      //       }
+      //       const msg = response.data.message;
+      //       if (msg === "SKU already exists!") {
+      //         toast.error("SKU already exists!", {
+      //           position: "top-center",
+      //         });
+      //       }
+      //     }
+      //   });
+      postProduct()
     } catch (err) {
       console.log(err);
     }
