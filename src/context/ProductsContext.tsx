@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useState } from "react";
 import { IChildren, IProducts, IProductsContext } from "../interface";
-import axios from "axios";
 
 const defaultValues = {
   products: [],
@@ -21,18 +20,17 @@ export const ProductsProvider = ({ children }: IChildren) => {
   const [skus, setSkus] = useState<string[] | []>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchProducts = () => {
-    axios
-      .get("https://gloria-graham.000webhostapp.com/api/readproducts.php/")
-      .then((res) => {
-        setProducts(res.data);
-        setMsg(res.data.message);
-        
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
-    setLoading(true);
-  };
+  const fetchProducts = async () => {
+    const data = await (
+      await fetch(
+        "https://gloria-graham.000webhostapp.com/api/readproducts.php/"
+      )
+    ).json()
+
+    setProducts(data)
+    setMsg(data.message)
+    setLoading(false)
+  }
 
   return (
     <ProductsContext.Provider
