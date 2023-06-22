@@ -64,7 +64,6 @@ function MainForm() {
   } 
 
   const postProduct = async (data: any) => {
-    try {
       const response = await fetch("https://gloria-graham.000webhostapp.com/api/addproduct.php", {
         method: 'POST',
         body: JSON.stringify(data),
@@ -81,9 +80,6 @@ function MainForm() {
           });
         }
       }
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   const handleSubmit = (event: React.FormEvent<EventTarget>) => {
