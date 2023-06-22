@@ -33,5 +33,4 @@ export interface IProducts{
     setSkus: React.Dispatch<React.SetStateAction<string[] | []>>
     setLoading?: React.Dispatch<React.SetStateAction<boolean>>
     fetchProducts: () => void
-
   }

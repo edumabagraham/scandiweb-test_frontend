@@ -64,7 +64,24 @@ function MainForm() {
     }
   }
 
-  const handleSubmit =  (event: React.FormEvent<EventTarget>) => {
+  const postProduct = async (data: any) => {
+    try {
+      const response = await fetch("https://gloria-graham.000webhostapp.com/api/addproduct.php", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        redirect: 'follow'
+      })
+      const productData = await response.json()
+      console.log(productData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleSubmit = (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
 
     validateForm();
@@ -72,68 +89,10 @@ function MainForm() {
     const cleanedData = Object.fromEntries(
       Object.entries(formData).filter(([_, val]) => val != "")
     );
+console.log(JSON.stringify(cleanedData));
 
-
-    // const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-
-    // const raw = JSON.stringify(cleanedData);
-
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: myHeaders,
-    //   body: raw,
-    //   redirect: 'follow'
-    // };
-
-    // fetch("https://gloria-graham.000webhostapp.com/api/addproduct.php", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
-
-
-    const postProduct = async () => {
-      const response = await fetch("http://gloria-graham.000webhostapp.com/api/addproduct.php", {
-        method: 'POST',
-        body: JSON.stringify(cleanedData),
-        headers: {
-          // Accept: 'application.json',
-          'Content-Type': 'application/json',
-          // mode: "no-cors",
-          // credentials: "same-origin"
-        },
-        redirect: 'follow'
-      })
-      const productData = await response.json()
-      console.log(productData);
-
-    }
-
-
-    try {
-      // axios
-      //   .post("https://gloria-graham.000webhostapp.com/api/addproduct.php/", cleanedData)
-      //   .then((response) => {
-      //     if (response.status === 200) {
-      //       console.log("request sent");
-
-      //       if (response.data.message === "Product added") {
-      //         navigate("/");
-      //       }
-      //       const msg = response.data.message;
-      //       if (msg === "SKU already exists!") {
-      //         toast.error("SKU already exists!", {
-      //           position: "top-center",
-      //         });
-      //       }
-      //     }
-      //   });
-     postProduct()
-
-    } catch (err) {
-      console.log(err);
-      alert("Could not fetch")
-    }
+    // Call post request function
+    postProduct(cleanedData)
   };
 
   return (
