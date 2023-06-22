@@ -61,7 +61,7 @@ function MainForm() {
         position: "top-center",
       });
     }
-  }
+  } 
 
   const postProduct = async (data: any) => {
     try {
@@ -70,9 +70,17 @@ function MainForm() {
         body: JSON.stringify(data),
       })
       const productData = await response.json()
-      console.log(productData);
-      console.log(productData.message);
-      
+      if (response.status === 200) {
+        if (productData.message === "Product added") {
+          navigate("/");
+        }
+        const msg = productData.message;
+        if (msg === "SKU already exists!") {
+          toast.error("SKU already exists!", {
+            position: "top-center",
+          });
+        }
+      }
     } catch (error) {
       console.log(error);
     }
