@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-// import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IFormValues } from "../../interface";
 
 function MainForm() {
@@ -18,7 +17,7 @@ function MainForm() {
     length: undefined,
   });
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
     setFormData((prevFormData) => {
@@ -68,14 +67,12 @@ function MainForm() {
     try {
       const response = await fetch("https://gloria-graham.000webhostapp.com/api/addproduct.php", {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
-        redirect: 'follow'
       })
       const productData = await response.json()
       console.log(productData);
+      console.log(productData.message);
+      
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +86,6 @@ function MainForm() {
     const cleanedData = Object.fromEntries(
       Object.entries(formData).filter(([_, val]) => val != "")
     );
-console.log(JSON.stringify(cleanedData));
 
     // Call post request function
     postProduct(cleanedData)
