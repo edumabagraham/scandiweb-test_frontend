@@ -4,7 +4,7 @@ import { ProductsContext } from "../../context/ProductsContext";
 // import axios from "axios";
 
 function Navbar() {
-  const {skus, fetchProducts} = useContext(ProductsContext)
+  const { skus, fetchProducts } = useContext(ProductsContext)
 
   // const handleDelete = () => {
   //   axios.post(
@@ -15,8 +15,9 @@ function Navbar() {
   //   .catch(err => alert(err));
   // };
 
-    const handleDelete =async () => {
-    const response = await fetch("https://gloria-graham.000webhostapp.com/api/deleteproduct.php", {
+  const handleDelete = async () => {
+    // const response = await fetch("https://gloria-graham.000webhostapp.com/api/deleteproduct.php", {
+    fetch("https://gloria-graham.000webhostapp.com/api/deleteproduct.php", {
       method: 'POST',
       body: JSON.stringify(skus),
       headers: {
@@ -25,10 +26,10 @@ function Navbar() {
         mode: "cors",
         credentials: "same-origin"
       }
-    }).then(()=>{
+    }).then(() => {
       fetchProducts()
     })
-    .catch(err => alert(err))
+      .catch(err => alert(err))
   }
 
   return (
