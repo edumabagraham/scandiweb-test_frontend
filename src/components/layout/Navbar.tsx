@@ -23,14 +23,14 @@ function Navbar() {
       </Link>
       <div className="nav__buttons">
         <Link to="/addproduct" className="nav__buttons-btn-ghost">
-          Add
+          ADD
         </Link>
         <button
           className="nav__buttons-btn-ghost nav__button"
           id="delete-product-btn"
           onClick={handleDelete}
         >
-          Mass delete
+          MASS DELETE
         </button>
       </div>
     </nav>
