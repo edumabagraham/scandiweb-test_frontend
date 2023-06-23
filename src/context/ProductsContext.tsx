@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useState } from "react";
-import { IChildren, IProducts, IProductsContext } from "../interface";
+import { IChildren, IProduct, IProductsContext } from "../types";
 
 const defaultValues = {
   products: [],
@@ -15,7 +15,7 @@ const defaultValues = {
 export const ProductsContext = createContext<IProductsContext>(defaultValues);
 
 export const ProductsProvider = ({ children }: IChildren) => {
-  const [products, setProducts] = useState<IProducts[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [msg, setMsg] = useState('');
   const [skus, setSkus] = useState<string[] | []>([]);
   const [loading, setLoading] = useState(true);

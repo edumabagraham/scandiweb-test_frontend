@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { IFormValues } from "../../interface";
+import { IFormValues } from "../../types";
 
 function MainForm() {
   const [formData, setFormData] = useState<IFormValues>({
@@ -122,6 +122,7 @@ function MainForm() {
           <label htmlFor="price">Price ($)</label>
           <input
             type="number"
+            maxLength={10}
             name="price"
             id="price"
             value={formData.price || ''}

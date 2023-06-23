@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { IProducts } from "../../interface";
+import { IProduct } from "../../types";
 import Card from "./Card";
 import { ProductsContext } from "../../context/ProductsContext";
 
@@ -12,7 +12,7 @@ function Product({
   height,
   width,
   length,
-}: IProducts) {
+}: IProduct) {
   const { skus, setSkus } = useContext(ProductsContext);
 
   const onChange = (product_sku: string) => {
@@ -30,7 +30,6 @@ function Product({
   };
 
   return (
-    <div>
       <Card>
         <div className="product-info">
           <div>
@@ -56,7 +55,6 @@ function Product({
           </div>
         </div>
       </Card>
-    </div>
   );
 }
 

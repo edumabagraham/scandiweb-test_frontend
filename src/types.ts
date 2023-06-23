@@ -1,8 +1,8 @@
-export interface IChildren {
+export type IChildren = {
     children?: React.ReactNode
   }
 
-export interface IFormValues {
+export type IFormValues = {
   sku: string;
   name: string;
   price: number | undefined;
@@ -14,7 +14,7 @@ export interface IFormValues {
   length?: number | undefined;
 }
 
-export interface IProducts{
+export type IProduct = {
     sku: string;
     name: string;
     price: number;
@@ -25,8 +25,8 @@ export interface IProducts{
     length?: number;
   }
 
-  export interface IProductsContext {
-    products: IProducts[]
+  export type IProductsContext =  {
+    products: IProduct[]
     msg:string
     loading: boolean
     skus: string[]
