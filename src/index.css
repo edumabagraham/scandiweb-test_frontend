@@ -119,7 +119,8 @@ footer {
 }
 
 #product_form {
-  width: max-content;
+  /* width: max-content; */
+  width: 35%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -135,6 +136,7 @@ footer {
 
 .input_label {
   margin-top: 10px;
+  /* background-color: red; */
 }
 
 input {
@@ -155,6 +157,12 @@ label{
 }
 .type_description {
   margin-top: 10px;
+}
+
+.error{
+  font-size: 10px;
+  color: red;
+  width: 100%;
 }
 
 .spinner {

@@ -5,13 +5,13 @@ export type IChildren = {
 export type IFormValues = {
   sku: string;
   name: string;
-  price: number | undefined;
+  price?: number;
   type: string;
-  size?: number | undefined;
-  weight?: number | undefined;
-  height?: number | undefined;
-  width?: number | undefined;
-  length?: number | undefined;
+  size?: number;
+  weight?: number;
+  height?: number;
+  width?: number;
+  length?: number;
 }
 
 export type IProduct = {

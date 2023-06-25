@@ -125,7 +125,7 @@ function MainForm() {
             maxLength={10}
             name="price"
             id="price"
-            value={formData.price || ''}
+            value={formData.price}
             onChange={handleChange}
           />
         </div>
@@ -133,8 +133,8 @@ function MainForm() {
           <label htmlFor="type">Type Switcher</label>
           <select
             id="productType"
-            value={formData.type}
             name="type"
+            value={formData.type}
             onChange={handleChange}
           >
             <option value="">Type Switcher</option>
