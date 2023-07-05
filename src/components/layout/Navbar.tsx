@@ -13,7 +13,6 @@ function Navbar() {
         body: JSON.stringify(skus),      
       }).then(() => {
         fetchProducts()
-        console.log("fetched");
       })
         .catch(err => alert(err))
     }
