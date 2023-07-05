@@ -7,13 +7,16 @@ function Navbar() {
 
 
   const handleDelete = async () => {
-    fetch("https://gloria-graham.000webhostapp.com/api/deleteproduct.php", {
-      method: 'POST',
-      body: JSON.stringify(skus),
-    }).then(() => {
-      fetchProducts()
-    })
-      .catch(err => alert(err))
+    if (skus.length !== 0) { 
+      fetch("https://gloria-graham.000webhostapp.com/api/deleteproduct.php", {
+        method: 'POST',
+        body: JSON.stringify(skus),      
+      }).then(() => {
+        fetchProducts()
+        console.log("fetched");
+      })
+        .catch(err => alert(err))
+    }
   }
 
   return (
