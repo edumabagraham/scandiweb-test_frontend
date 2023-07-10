@@ -10,7 +10,7 @@ function ProductsList() {
     fetchProducts();
   }, []);
 
-  if (!loading) {
+  // if (!loading) {
     return (
       <>
         <div className="products-list">
@@ -32,9 +32,10 @@ function ProductsList() {
         <h1 className="no_products">{msg}</h1>
       </>
     );
-  } else {
-    return <Spinner />;
-  }
+//   } 
+//   else {
+//     return <Spinner />;
+//   }
 }
 
 export default ProductsList;
