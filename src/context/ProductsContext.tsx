@@ -5,7 +5,6 @@ import { IChildren, IProduct, IProductsContext } from "../types";
 const defaultValues = {
   products: [],
   msg:'',
-  loading: true,
   skus: [],
   setSkus: () => {},
   setLoading: () => {},
@@ -18,7 +17,6 @@ export const ProductsProvider = ({ children }: IChildren) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [msg, setMsg] = useState('');
   const [skus, setSkus] = useState<string[] | []>([]);
-  const [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
     const data = await (
@@ -29,7 +27,6 @@ export const ProductsProvider = ({ children }: IChildren) => {
 
     setProducts(data)
     setMsg(data.message)
-    setLoading(false)
   }
 
   return (
@@ -37,7 +34,6 @@ export const ProductsProvider = ({ children }: IChildren) => {
       value={{
         products,
         msg,
-        loading,
         skus,
         setSkus,
         fetchProducts,

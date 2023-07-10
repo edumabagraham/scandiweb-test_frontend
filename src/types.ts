@@ -28,7 +28,6 @@ export type IProduct = {
   export type IProductsContext =  {
     products: IProduct[]
     msg:string
-    loading: boolean
     skus: string[]
     setSkus: React.Dispatch<React.SetStateAction<string[] | []>>
     setLoading?: React.Dispatch<React.SetStateAction<boolean>>

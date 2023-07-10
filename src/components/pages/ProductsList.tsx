@@ -1,16 +1,14 @@
 import { useEffect, useContext } from "react";
-import Spinner from "../layout/Spinner";
 import Product from "../layout/Product";
 import { ProductsContext } from "../../context/ProductsContext";
 
 function ProductsList() {
-  const { fetchProducts, products, msg, loading } = useContext(ProductsContext);
+  const { fetchProducts, products, msg } = useContext(ProductsContext);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  // if (!loading) {
     return (
       <>
         <div className="products-list">
@@ -32,10 +30,6 @@ function ProductsList() {
         <h1 className="no_products">{msg}</h1>
       </>
     );
-//   } 
-//   else {
-//     return <Spinner />;
-//   }
 }
 
 export default ProductsList;
