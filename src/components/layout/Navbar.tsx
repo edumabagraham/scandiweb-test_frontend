@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { ProductsContext } from "../../context/ProductsContext";
 
 function Navbar() {
-  const { skus, fetchProducts } = useContext(ProductsContext)
+  const { skus, setSkus, fetchProducts } = useContext(ProductsContext)
 
 
   const handleDelete = async () => {
@@ -13,6 +13,7 @@ function Navbar() {
         body: JSON.stringify(skus),      
       }).then(() => {
         fetchProducts()
+        setSkus([])     
       })
         .catch(err => alert(err))
     }
